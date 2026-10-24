@@ -1,0 +1,411 @@
+<ion-app>
+  <ion-content [fullscreen]="true" class="edt-page">
+    
+    <!-- TOP NAVIGATION BAR -->
+    <header class="site-header">
+      <div class="header-inner">
+        <nav class="nav-menu">
+          <a (click)="scrollToSection('services')">Services</a>
+          <a (click)="scrollToSection('why-us')">Why EDT</a>
+          <a (click)="scrollToSection('quote-section')" class="nav-quote-btn">Get a Quote</a>
+        </nav>
+
+        <div class="header-contact-actions">
+          <a href="tel:+27646587141" class="header-phone-btn" title="Call Us (+27 64 658 7141)" aria-label="Call Us">
+            <ion-icon name="call-outline"></ion-icon>
+          </a>
+          <a href="https://wa.me/27646587141?text=Hi%20EDT%20Autoworks%2C%20I%20would%20like%20to%20inquire%20about%20a%20service%20or%20repair" target="_blank" class="header-whatsapp-btn" title="Chat on WhatsApp" aria-label="WhatsApp">
+            <ion-icon name="logo-whatsapp"></ion-icon>
+          </a>
+          <button 
+            type="button" 
+            class="header-sandwich-btn" 
+            (click)="toggleMobileMenu()" 
+            [attr.aria-expanded]="mobileMenuOpen()" 
+            title="Toggle Navigation Menu"
+            aria-label="Toggle navigation menu"
+          >
+            <ion-icon [name]="mobileMenuOpen() ? 'close-outline' : 'menu-outline'"></ion-icon>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- MOBILE NAVIGATION PANEL -->
+      <div class="mobile-nav-panel" [class.open]="mobileMenuOpen()">
+        <div class="mobile-nav-content">
+          <a (click)="scrollToSection('services')" class="mobile-nav-item">
+            <ion-icon name="construct-outline"></ion-icon>
+            <span>Services</span>
+          </a>
+          <a (click)="scrollToSection('why-us')" class="mobile-nav-item">
+            <ion-icon name="shield-checkmark-outline"></ion-icon>
+            <span>Why EDT</span>
+          </a>
+          <a (click)="scrollToSection('quote-section')" class="mobile-nav-item quote-item">
+            <ion-icon name="document-text-outline"></ion-icon>
+            <span>Request an Estimate</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN BODY -->
+    <main class="content-wrapper">
+
+      <!-- HERO SECTION -->
+      <section id="hero" class="hero-block">
+        
+        <div class="hero-grid">
+          
+          <!-- LEFT: LOGO EMBLEM EMBED -->
+          <div class="hero-emblem-wrap">
+            <div class="emblem-card">
+              <img 
+                src="assets/images/edt-logo.jpg" 
+                alt="EDT Autoworks Performance Precision Passion Logo" 
+                class="emblem-img"
+              />
+            </div>
+            <div class="emblem-tagline">
+              <span>CAPE TOWN, WESTERN CAPE</span>
+            </div>
+            <div class="emblem-owner-badge">
+              <ion-icon name="person-circle-outline"></ion-icon>
+              <span>Ran & operated by <strong>Etienne Du Toit</strong></span>
+            </div>
+          </div>
+
+          <!-- RIGHT: INTRO CONTENT -->
+          <div class="hero-info-wrap">
+
+            <h1 class="main-headline">
+              DEDICATED SERVICE.<br/>
+              <span class="headline-highlight">MOTORSPORT PASSION.</span><br/>
+              HONEST WORKMANSHIP.
+            </h1>
+
+            <p class="hero-bio">
+              Welcome to <strong>EDT Autoworks</strong>, ran and operated by <strong>Etienne Du Toit</strong>. We are an independent automotive mechanical and performance specialist based in Cape Town. Driven by a hands-on passion for cars, we provide expert mechanical repairs, computer diagnostics, logbook maintenance, and bespoke performance upgrades. You deal directly with Etienne on every job — with genuine advice, transparent communication, and zero dealership overheads.
+            </p>
+
+            <div class="hero-trust-bar">
+              <div class="trust-item">
+                <ion-icon name="person-circle-outline"></ion-icon>
+                <span>Direct 1-on-1 Communication</span>
+              </div>
+              <div class="trust-item">
+                <ion-icon name="construct-outline"></ion-icon>
+                <span>Hands-On Enthusiast Care</span>
+              </div>
+              <div class="trust-item">
+                <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+                <span>Transparent Diagnostics</span>
+              </div>
+            </div>
+
+            <div class="hero-buttons">
+              <a href="https://wa.me/27646587141?text=Hi%20EDT%20Autoworks%2C%20I%20would%20like%20to%20inquire%20about%20a%20service%20or%20quote" target="_blank" class="btn-hero-wa">
+                <ion-icon name="logo-whatsapp"></ion-icon>
+                <span>Chat on WhatsApp</span>
+              </a>
+
+              <button type="button" class="btn-hero-quote" (click)="scrollToSection('quote-section')">
+                <ion-icon name="document-text-outline"></ion-icon>
+                <span>Request an Estimate</span>
+              </button>
+
+              <a href="tel:+27646587141" class="btn-hero-call">
+                <ion-icon name="call-outline"></ion-icon>
+                <span>+27 64 658 7141</span>
+              </a>
+            </div>
+
+            <!-- FIRST PAGE ADDRESS & HOURS -->
+            <div class="hero-address-card">
+              <div class="addr-line">
+                <ion-icon name="location-outline"></ion-icon>
+                <span><strong>Address:</strong> 16 Peperdruif St, Blommendal Bellville, 7530 <span class="addr-note">• Drop-offs & visits strictly by appointment</span></span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- SERVICES SECTION -->
+      <section id="services" class="services-block">
+        
+        <div class="block-title-center">
+          <span class="section-kicker">WHAT WE DO</span>
+          <h2>MECHANICAL SERVICES & SPECIALTIES</h2>
+          <p class="section-desc">
+            From daily drivers needing routine logbook care to modified vehicles requiring specialized performance attention.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          @for (service of servicesList; track service.title) {
+            <div class="service-item-card" (click)="selectService(service.title); scrollToSection('quote-section')">
+              
+              <div class="card-header-icon">
+                <div class="icon-bubble">
+                  <ion-icon [name]="service.icon"></ion-icon>
+                </div>
+                <span class="book-pill">Select & Inquire</span>
+              </div>
+
+              <h3>{{ service.title }}</h3>
+              <div class="service-sub">{{ service.subtitle }}</div>
+              <p class="service-body">{{ service.description }}</p>
+
+              <div class="service-checklist">
+                @for (item of service.highlights; track item) {
+                  <div class="check-point">
+                    <ion-icon name="checkmark-outline"></ion-icon>
+                    <span>{{ item }}</span>
+                  </div>
+                }
+              </div>
+
+            </div>
+          }
+        </div>
+
+      </section>
+
+      <!-- WHY CHOOSE EDT / THE INDEPENDENT ADVANTAGE -->
+      <section id="why-us" class="why-block">
+        
+        <div class="why-card">
+          <div class="why-grid">
+            
+            <div class="why-text-col">
+              <span class="section-kicker">THE EDT DIFFERENCE</span>
+              <h2>THE ADVANTAGE OF AN INDEPENDENT SPECIALIST</h2>
+              <p>
+                Large dealerships and commercial chain workshops often pass your car between junior apprentices and service advisors who never actually turn a wrench. At EDT Autoworks, every vehicle is personally handled by Etienne Du Toit:
+              </p>
+
+              <div class="advantages-list">
+                
+                <div class="adv-item">
+                  <div class="adv-icon">
+                    <ion-icon name="chatbubbles-outline"></ion-icon>
+                  </div>
+                  <div class="adv-details">
+                    <h4>Direct Communication with Etienne</h4>
+                    <p>You speak directly with Etienne, the specialist inspecting and working on your car. No mixed messages or guessing games.</p>
+                  </div>
+                </div>
+
+                <div class="adv-item">
+                  <div class="adv-icon">
+                    <ion-icon name="shield-outline"></ion-icon>
+                  </div>
+                  <div class="adv-details">
+                    <h4>No Unnecessary Upselling</h4>
+                    <p>We diagnose what your car genuinely needs and give honest assessments. We never push services you don't require.</p>
+                  </div>
+                </div>
+
+                <div class="adv-item">
+                  <div class="adv-icon">
+                    <ion-icon name="heart-outline"></ion-icon>
+                  </div>
+                  <div class="adv-details">
+                    <h4>Enthusiast-Level Attention to Detail</h4>
+                    <p>Every bolt torqued correctly, clean work practices, and genuine pride taken in every job we undertake.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="why-quick-contact-col">
+              <div class="contact-box-accent">
+                <div class="box-tag">BASED IN CAPE TOWN</div>
+                <h3>Have a Question About Your Car?</h3>
+                <p>Send us a quick WhatsApp message with what's happening and your car's details. We're happy to advise.</p>
+                
+                <a href="https://wa.me/27646587141?text=Hi%20EDT%20Autoworks%2C%20I%20have%20a%20question%20about%20my%20car" target="_blank" class="btn-wa-direct">
+                  <ion-icon name="logo-whatsapp"></ion-icon>
+                  <span>WhatsApp +27 64 658 7141</span>
+                </a>
+
+                <div class="quick-call-link">
+                  <span>Or give us a call:</span>
+                  <a href="tel:+27646587141">+27 64 658 7141</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- QUOTE & BOOKING INQUIRY SECTION -->
+      <section id="quote-section" class="quote-block">
+        
+        <div class="block-title-center">
+          <span class="section-kicker">GET IN TOUCH</span>
+          <h2>REQUEST A QUOTE OR SERVICE INQUIRY</h2>
+          <p class="section-desc">
+            Select what you need, tell us about your vehicle, and send it directly via WhatsApp or Email.
+          </p>
+        </div>
+
+        <div class="quote-card-wrap">
+          
+          <!-- SINGLE CLEAN INQUIRY FORM CARD -->
+          <div class="form-container-card">
+            
+            <form (submit)="$event.preventDefault()">
+              
+              <!-- STEP 1: SERVICE TYPE -->
+              <div class="form-row-group">
+                <label class="group-header">1. Select Service Category</label>
+                <div class="chips-flex">
+                  @for (opt of serviceOptions; track opt) {
+                    <button 
+                      type="button" 
+                      class="option-chip"
+                      [class.chip-selected]="selectedService() === opt"
+                      (click)="selectService(opt)"
+                    >
+                      {{ opt }}
+                    </button>
+                  }
+                </div>
+              </div>
+
+              <!-- STEP 2: CONTACT DETAILS -->
+              <div class="form-row-group">
+                <label class="group-header">2. Your Contact Details</label>
+                <div class="fields-two-col">
+                  
+                  <div class="single-field">
+                    <label>Your Name *</label>
+                    <input 
+                      type="text" 
+                      [value]="name()" 
+                      (input)="updateField('name', $event)" 
+                      placeholder="e.g. Brandon" 
+                      required 
+                    />
+                  </div>
+
+                  <div class="single-field">
+                    <label>Phone / WhatsApp Number *</label>
+                    <input 
+                      type="tel" 
+                      [value]="phone()" 
+                      (input)="updateField('phone', $event)" 
+                      placeholder="e.g. 064 658 7141" 
+                    />
+                  </div>
+
+                  <div class="single-field full-span">
+                    <label>Email Address (Optional)</label>
+                    <input 
+                      type="email" 
+                      [value]="email()" 
+                      (input)="updateField('email', $event)" 
+                      placeholder="e.g. name&#64;example.com" 
+                    />
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- STEP 3: VEHICLE DETAILS -->
+              <div class="form-row-group">
+                <label class="group-header">3. Vehicle Specification *</label>
+                <div class="single-field">
+                  <input 
+                    type="text" 
+                    [value]="vehicle()" 
+                    (input)="updateField('vehicle', $event)" 
+                    placeholder="e.g. 2017 VW Golf GTI / 2.0 TSI or 2012 BMW 320d" 
+                    required 
+                  />
+                </div>
+              </div>
+
+              <!-- STEP 4: DETAILS -->
+              <div class="form-row-group">
+                <label class="group-header">4. What do you need done or what is happening? *</label>
+                <div class="single-field">
+                  <textarea 
+                    rows="4" 
+                    [value]="issue()" 
+                    (input)="updateField('issue', $event)" 
+                    placeholder="Describe what you need (e.g. major 90,000km service, diagnosing a strange noise or warning light, brake shudder, or installing a downpipe and turbo kit)..." 
+                    required
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- SUBMIT BUTTONS (WHATSAPP + EMAIL) -->
+              <div class="action-buttons-row">
+                
+                <button type="button" class="btn-send-whatsapp" (click)="sendViaWhatsApp()">
+                  <ion-icon name="logo-whatsapp"></ion-icon>
+                  <span>Send Inquiry via WhatsApp</span>
+                </button>
+
+                <button type="button" class="btn-send-email" (click)="sendViaEmail()">
+                  <ion-icon name="mail-outline"></ion-icon>
+                  <span>Send via Email</span>
+                </button>
+
+              </div>
+
+              @if (submittedNotice()) {
+                <div class="notice-toast">
+                  <ion-icon name="information-circle-outline"></ion-icon>
+                  <span>{{ submittedNotice() }}</span>
+                  <button type="button" class="notice-close" (click)="clearNotice()">✕</button>
+                </div>
+              }
+
+              <div class="form-address-note">
+                <ion-icon name="location-outline"></ion-icon>
+                <span>Based in Cape Town, Western Cape • Drop-offs & visits strictly by appointment • Direct: +27 64 658 7141</span>
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- REALISTIC FOOTER -->
+      <footer class="site-footer">
+        <div class="footer-content">
+          
+          <div class="footer-brand-side">
+            <img src="assets/images/edt-logo.jpg" alt="EDT Autoworks Logo" class="footer-logo-small" />
+            <div>
+              <div class="footer-title">ED<span class="red-accent">T</span> AUTOWORKS</div>
+              <div class="footer-tagline">PERFORMANCE • PRECISION • PASSION</div>
+              <div class="footer-owner">Ran & operated by Etienne Du Toit</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="footer-bottom-line">
+          <p>&copy; 2026 EDT Autoworks • Ran & operated by Etienne Du Toit • Independent Automotive & Performance Specialist • Cape Town, South Africa.</p>
+        </div>
+      </footer>
+
+    </main>
+
+  </ion-content>
+</ion-app>

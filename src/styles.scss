@@ -1,0 +1,63 @@
+/* Global Theme & Reset for EDT Autoworks */
+@import '@ionic/angular/css/palettes/dark.always.css';
+
+:root {
+  --edt-red-primary: #ff1e27;
+  --edt-red-deep: #bf0711;
+  --edt-red-neon: #ff3c45;
+  --edt-red-glow: rgba(255, 30, 39, 0.45);
+  --edt-red-glow-subtle: rgba(255, 30, 39, 0.15);
+  
+  --edt-chrome-bright: #ffffff;
+  --edt-chrome-light: #e6ebf2;
+  --edt-chrome-mid: #9ba8ba;
+  --edt-chrome-dark: #4d5766;
+  --edt-gunmetal: #151821;
+  --edt-carbon-bg: #07080b;
+  --edt-surface-dark: #0e1117;
+  --edt-surface-card: rgba(15, 18, 25, 0.88);
+  --edt-card-border: rgba(255, 255, 255, 0.1);
+  --edt-card-border-glow: rgba(255, 30, 39, 0.5);
+
+  --font-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Orbitron', 'Montserrat', sans-serif;
+
+  /* Ionic Overrides */
+  --ion-background-color: var(--edt-carbon-bg);
+  --ion-text-color: var(--edt-chrome-light);
+  --ion-font-family: var(--font-primary);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--edt-carbon-bg);
+  color: var(--edt-chrome-light);
+  font-family: var(--font-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ion-app {
+  background-color: var(--edt-carbon-bg);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #090a0e;
+}
+::-webkit-scrollbar-thumb {
+  background: #252833;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--edt-red-primary);
+}
