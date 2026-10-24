@@ -14,63 +14,63 @@ export class AppComponent {
   email = signal<string>('');
   phone = signal<string>('');
   vehicle = signal<string>('');
-  selectedService = signal<string>('General Service & Maintenance');
+  selectedService = signal<string>('Vehicle Servicing (Minor & Major)');
   issue = signal<string>('');
   submittedNotice = signal<string | null>(null);
   mobileMenuOpen = signal<boolean>(false);
 
   readonly serviceOptions = [
-    'General Service & Maintenance',
-    'Diagnostics & Warning Lights',
-    'Brakes & Suspension',
-    'Performance Parts & Turbo Upgrades',
-    'Engine Mechanical Repairs',
-    'Clutch & Drivetrain',
+    'Vehicle Servicing (Minor & Major)',
+    'Mechanical Repairs (Engine & Drivetrain)',
+    'Diagnostics & Electrical Repairs',
+    'Brakes, Steering & Suspension',
+    'General Maintenance (Cooling & Belts)',
+    'Performance Modifications & Upgrades',
     'Other / Custom Project'
   ];
 
   readonly servicesList = [
     {
-      title: 'Logbook Servicing & Maintenance',
-      subtitle: 'Routine Care & Preventative Checks',
-      description: 'Major and minor servicing including high-grade synthetic oil changes, spark plugs, filters, fluid flushes, and comprehensive vehicle safety inspections.',
+      title: 'Vehicle Servicing',
+      subtitle: 'Minor & Major Services',
+      description: 'Comprehensive minor and major services carried out to exacting standards, including premium synthetic oils, filter changes, spark plugs, fluid inspections, and bumper-to-bumper vehicle safety evaluations.',
       icon: 'construct-outline',
-      highlights: ['Engine Oil & Filters', 'Brake Fluid & Coolant', 'Full Safety Checklist']
+      highlights: ['Minor & Major Servicing', 'High-Grade Synthetic Oils & Filters', 'Multi-Point Safety Checklist']
     },
     {
-      title: 'Computer Diagnostics & Fault Finding',
-      subtitle: 'Accurate Problem Isolation',
-      description: 'In-depth OBD2 computer scans, live sensor data analysis, check engine light diagnostics, and electrical troubleshooting to identify faults before replacing parts.',
-      icon: 'hardware-chip-outline',
-      highlights: ['Check Engine Lights', 'Sensor Live Data', 'Electrical Troubleshooting']
-    },
-    {
-      title: 'Brakes & Suspension Overhauls',
-      subtitle: 'Stopping Power & Handling',
-      description: 'Disc and pad replacements, brake fluid bleeding, coilover installations, lowering springs, control arms, and bush replacements for daily driving or spirited performance.',
-      icon: 'car-sport-outline',
-      highlights: ['Pads & Rotors', 'Coilovers & Springs', 'Bushings & Ball Joints']
-    },
-    {
-      title: 'Performance Bolt-Ons & Turbo Upgrades',
-      subtitle: 'Bespoke Upgrades For Enthusiasts',
-      description: 'Installation of aftermarket bolt-on performance hardware: intercoolers, turbo conversions, downpipes, intake systems, blow-off valves, and custom plumbing.',
-      icon: 'speedometer-outline',
-      highlights: ['Turbo & Intercoolers', 'Intakes & Downpipes', 'Boost Hardware']
-    },
-    {
-      title: 'Mechanical Repairs & Overhauls',
-      subtitle: 'Reliable Engine & Drivetrain Repairs',
-      description: 'Timing belt and timing chain replacements, cylinder head gaskets, cooling system refreshes (water pumps & thermostats), and clutch replacements.',
+      title: 'Mechanical Repairs',
+      subtitle: 'Engine, Clutch, Gearbox & Drivetrain',
+      description: 'In-depth mechanical overhauls and driveline repairs: engine internal work, clutch kit replacements, gearbox maintenance, differential servicing, drive-shafts, and drivetrain troubleshooting.',
       icon: 'settings-outline',
-      highlights: ['Timing Chains & Belts', 'Head Gaskets & Seals', 'Clutch Replacements']
+      highlights: ['Engine Mechanical Overhauls', 'Clutch Kit Replacements', 'Gearbox & Drivetrain Care']
     },
     {
-      title: 'Pre-Purchase & Track Inspections',
-      subtitle: 'Peace of Mind On Every Drive',
-      description: 'Comprehensive mechanical pre-purchase health checks before you buy a vehicle, plus track-day nut-and-bolt safety inspections to ensure reliability under load.',
+      title: 'Diagnostics & Electrical',
+      subtitle: 'Engine Fault Finding & Electrical Repairs',
+      description: 'Advanced computer diagnostics and live data scanning to pinpoint check engine lights, fault codes, rough running, sensor anomalies, and auto-electrical circuit repairs with zero guesswork.',
+      icon: 'hardware-chip-outline',
+      highlights: ['Engine Fault Finding & OBD Scans', 'Live Sensor Data Diagnostics', 'Auto-Electrical Wiring Repairs']
+    },
+    {
+      title: 'Brakes, Steering & Suspension',
+      subtitle: 'Brake, Steering & Suspension Repairs',
+      description: 'Precision stopping power and responsive road handling. Brake disc and pad replacements, fluid bleeding, rack & pinion steering repairs, tie-rod ends, control arm bushings, coilovers, and shocks.',
+      icon: 'car-sport-outline',
+      highlights: ['Brake Discs, Pads & Calipers', 'Steering Repairs & Linkages', 'Suspension & Bushing Overhauls']
+    },
+    {
+      title: 'General Maintenance',
+      subtitle: 'Cooling Systems, Belts, Hoses & Fluids',
+      description: 'Essential preventative care keeping your engine at optimal operating temperature and preventing unexpected breakdowns: radiators, water pumps, thermostats, drive belts, timing belts, and cooling hoses.',
       icon: 'shield-checkmark-outline',
-      highlights: ['Pre-Buy Inspection', 'Compression Testing', 'Fluid & Belt Checks']
+      highlights: ['Cooling Systems & Radiators', 'Water Pumps & Thermostats', 'Belts, Hoses & Fluid Flushes']
+    },
+    {
+      title: 'Performance Modifications',
+      subtitle: 'Hardware Upgrades & Motorsport Prep',
+      description: 'Bespoke performance upgrades and modifications for automotive enthusiasts: bolt-on turbo conversions, high-flow intercoolers, custom downpipes, performance intakes, uprated clutches, and spirited setup.',
+      icon: 'speedometer-outline',
+      highlights: ['Performance Bolt-Ons & Hardware', 'Turbo & Intercooler Upgrades', 'Intakes, Downpipes & Boost Setup']
     }
   ];
 
@@ -86,7 +86,12 @@ export class AppComponent {
   }
 
   selectService(service: string) {
-    this.selectedService.set(service);
+    const clean = service.toLowerCase();
+    const matched = this.serviceOptions.find(opt => {
+      const optClean = opt.toLowerCase();
+      return optClean.includes(clean) || clean.includes(optClean.split(' (')[0]);
+    });
+    this.selectedService.set(matched || service);
   }
 
   toggleMobileMenu() {
