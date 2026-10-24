@@ -20,7 +20,7 @@
 .why-block,
 .quote-block,
 .info-sidebar {
-  scroll-margin-top: calc(96px + env(safe-area-inset-top, 0px));
+  scroll-margin-top: calc(100px + env(safe-area-inset-top, 0px));
 }
 
 /* ==========================================================================
@@ -29,18 +29,18 @@
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: rgba(13, 14, 18, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  background: rgba(13, 14, 18, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: env(safe-area-inset-top, 0px);
+  padding-top: max(0.5rem, env(safe-area-inset-top, 0px));
 }
 
 .header-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0.85rem calc(1.5rem + env(safe-area-inset-right, 0px)) 0.85rem calc(1.5rem + env(safe-area-inset-left, 0px));
+  padding: 0.75rem calc(1.5rem + env(safe-area-inset-right, 0px)) 0.75rem calc(1.5rem + env(safe-area-inset-left, 0px));
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -995,6 +995,10 @@
 }
 
 @media (max-width: 768px) {
+  .site-header {
+    /* Critical for mobile: Ensures the notch / Dynamic Island / status bar NEVER overlaps the navbar buttons */
+    padding-top: max(1.1rem, calc(env(safe-area-inset-top, 0px) + 0.65rem));
+  }
   .nav-menu {
     display: none;
   }
@@ -1002,8 +1006,24 @@
     display: inline-flex;
   }
   .header-inner {
-    padding: 0.75rem calc(1rem + env(safe-area-inset-right, 0px)) 0.75rem calc(1rem + env(safe-area-inset-left, 0px));
-    gap: 0.75rem;
+    padding: 0.55rem calc(0.85rem + env(safe-area-inset-right, 0px)) 0.65rem calc(0.85rem + env(safe-area-inset-left, 0px));
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+  .header-phone-btn,
+  .header-whatsapp-btn,
+  .header-sandwich-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .header-phone-btn ion-icon {
+    font-size: 1.15rem;
+  }
+  .header-whatsapp-btn ion-icon {
+    font-size: 1.2rem;
+  }
+  .header-sandwich-btn ion-icon {
+    font-size: 1.35rem;
   }
   .mobile-nav-panel {
     display: block;
