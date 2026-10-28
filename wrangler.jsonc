@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Static Angular site served via Cloudflare Workers static assets.
+  // Having this file stops Wrangler from trying to auto-configure Angular SSR.
+  "name": "edt-autoworks",
+  "compatibility_date": "2025-10-01",
+  "assets": {
+    "directory": "./dist/edt-autoworks/browser",
+    "not_found_handling": "single-page-application"
+  }
+}
