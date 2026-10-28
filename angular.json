@@ -28,6 +28,10 @@
 "assets": [
 "src/favicon.ico",
 "src/assets",
+"src/robots.txt",
+"src/sitemap.xml",
+"src/CNAME",
+"src/site.webmanifest",
 {
 "glob": "**/*.svg",
 "input": "node_modules/ionicons/dist/ionicons/svg",
